@@ -24,6 +24,10 @@ public class Main : Node
         var hud = GetNode<HUD>("HUD");
         hud.UpdateScore(_score);
         hud.ShowMessage("Get Ready!");
+
+        foreach(Node mobs in GetTree().GetNodesInGroup("mobs")){
+            mobs.QueueFree();
+        }
     }
 
     private void OnPlayTimerTimeout(){
