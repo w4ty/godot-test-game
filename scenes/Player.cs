@@ -15,7 +15,6 @@ public class Player : Area2D
 	public override void _Ready()
 	{
 		ScreenSize = GetViewportRect().Size;
-		Position = new Vector2(640, 600);
 	}
 
 	public void Start(Vector2 position){
@@ -46,7 +45,7 @@ public class Player : Area2D
 
 	private void OnBodyEntered(Node2D body){
 		Hide();
-		EmitSignal("Hit");
+		EmitSignal("HitEventHandler");
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("Disabled", true);
 	}
 }

@@ -3,10 +3,6 @@ using System;
 
 public class Mob : RigidBody2D
 {
-    public override void _Ready()
-    {
-        
-    }
     private void OnVisibleOnScreenNotifier2DScreenExited(){
         QueueFree();
     }
