@@ -1,6 +1,6 @@
 using System.Numerics;
 
-public interface IProjectile
+public interface IMoveable
 {
     int Speed { get; set; }
     

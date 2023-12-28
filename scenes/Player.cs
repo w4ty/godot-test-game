@@ -49,7 +49,7 @@ public class Player : Area2D, IFireable
 		}
 	}
 
-	private void OnBodyEntered(Node2D body){
+	private void OnAreaEntered(Node2D Area){
 		Hide();
 		EmitSignal("HitEventHandler");
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("Disabled", true);
@@ -59,6 +59,5 @@ public class Player : Area2D, IFireable
 		Projectile projectile = Projectile.Instance<Projectile>();
 		projectile.Position = Position;
 		Owner.AddChild(projectile);
-		GD.Print("Fired");
 	}
 }

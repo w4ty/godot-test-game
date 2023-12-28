@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Projectile : Area2D, IProjectile
+public class Projectile : Area2D, IMoveable
 {
     [Export]
     public int Speed { get; set; }
@@ -14,6 +14,9 @@ public class Projectile : Area2D, IProjectile
         Move(delta);
     }
     private void OnVisibilityNotifier2DScreenExited(){
+        QueueFree();
+    }
+    private void OnAreaEntered(Node2D Area){
         QueueFree();
     }
 }

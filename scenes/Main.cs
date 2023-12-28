@@ -49,9 +49,6 @@ public class Main : Node
 
         mob.Position = mobSpawnLocation.Position;
 
-        var velocity = new Vector2(0, (float)GD.RandRange(200.0, 250.0));
-        mob.LinearVelocity = velocity;
-
         AddChild(mob);
     }
 }
