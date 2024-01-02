@@ -14,6 +14,9 @@ public class Player : Area2D, IFireable, IMoveable
 	public PackedScene Projectile { get; set; }
 
 	public Vector2 ScreenSize;
+
+	public float FireRate { get; set; } = 3;
+	public float ShotDelay { get; set; }
 	
 	public override void _Ready()
 	{
@@ -30,8 +33,11 @@ public class Player : Area2D, IFireable, IMoveable
 	public override void _Process(float delta)
 	{
 		Move(delta);
-		if(Input.IsActionJustPressed("base_fire")){
+		if(Input.IsActionPressed("base_fire") && ShotDelay <= 0){
 			Fire();
+		}
+		else if(ShotDelay > 0){
+			ShotDelay -= delta;
 		}
 	}
 	public void Move(float delta){
@@ -62,5 +68,6 @@ public class Player : Area2D, IFireable, IMoveable
 		Projectile projectile = Projectile.Instance<Projectile>();
 		projectile.Position = Position;
 		Owner.AddChild(projectile);
+		ShotDelay = 1/FireRate;
 	}
 }
