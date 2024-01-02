@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public class Player : Area2D, IFireable
+public class Player : Area2D, IFireable, IMoveable
 {
 	[Signal]
 	public delegate void HitEventHandler();
@@ -29,6 +29,12 @@ public class Player : Area2D, IFireable
 
 	public override void _Process(float delta)
 	{
+		Move(delta);
+		if(Input.IsActionJustPressed("base_fire")){
+			Fire();
+		}
+	}
+	public void Move(float delta){
 		var velocity = Vector2.Zero;
 		velocity.x += Input.GetActionStrength("move_right");
 		velocity.x -= Input.GetActionStrength("move_left");
@@ -44,9 +50,6 @@ public class Player : Area2D, IFireable
     		x: Mathf.Clamp(Position.x, 32, ScreenSize.x -32),
     		y: Mathf.Clamp(Position.y, 32, ScreenSize.y -32)
 		);
-		if(Input.IsActionJustPressed("base_fire")){
-			Fire();
-		}
 	}
 
 	private void OnAreaEntered(Node2D Area){
